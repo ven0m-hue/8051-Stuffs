@@ -1,0 +1,3 @@
+".\Objects\0IR.obj" 
+TO ".\Objects\ironman" 
+PRINT(".\Listings\ironman.m51") RAMSIZE(256) 

@@ -1,0 +1,177 @@
+C51 COMPILER V9.59.0.0   TESTER                                                            02/22/2020 20:49:04 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TESTER
+OBJECT MODULE PLACED IN .\Objects\tester.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE tester.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\tester.l
+                    -st) TABS(2) OBJECT(.\Objects\tester.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          sbit rs = P3^5;         // rs pin of LCD
+   4          sbit en = P3^2;         // en pin of LCD
+   5          sbit rw = P3^7;         // rw pin of LCD
+   6          sbit b = P1^7;          // busy flag 
+   7          sbit led = P3^0;        // led indication
+   8          unsigned int flag=0;      // rpm flag
+   9          
+  10          void delay()          // 1 sec delay
+  11            {
+  12   1          int k;
+  13   1        TL1 = 0xAF;         // load value 15535=3CAF
+  14   1        TH1 = 0x3C;
+  15   1        TR1 = 1;
+  16   1        for(k=0;k<20;k++)
+  17   1          {
+  18   2          while(TF1==0);
+  19   2          TF1 = 0;
+  20   2          TL1 = 0xAF;
+  21   2          TH1 = 0x3C;
+  22   2          }
+  23   1        TR1 = 0;
+  24   1        }
+  25          void busy()             // check busy flag
+  26          {
+  27   1        en = 0;
+  28   1        P1 = 0xFF;
+  29   1        rs = 0;
+  30   1        rw = 1;
+  31   1        while(b==1)
+  32   1        {
+  33   2         en=0;
+  34   2         en=1;
+  35   2        }
+  36   1        en=0;
+  37   1      }
+  38          void writecmd(unsigned char a)  // send command byte to LCD
+  39          {
+  40   1        busy();
+  41   1        rs = 0;
+  42   1        rw = 0;
+  43   1        P1 = a; 
+  44   1        en = 1;
+  45   1        delay();
+  46   1        en = 0;
+  47   1      }
+  48          void writedata(unsigned char b) // send data byte to LCD
+  49          {
+  50   1        busy();
+  51   1        rs = 1;
+  52   1        rw = 0;
+  53   1        P1 = b; 
+  54   1        en = 1;
+C51 COMPILER V9.59.0.0   TESTER                                                            02/22/2020 20:49:04 PAGE 2   
+
+  55   1        delay();
+  56   1        en = 0; 
+  57   1      }
+  58          void writestr(unsigned char *s) // write string / message to LCD
+  59          {
+  60   1        unsigned char l,i;
+  61   1        l = strlen(s);
+  62   1        for(i=0;i<l;i++)
+  63   1        {
+  64   2          writedata(*s);
+  65   2          s++;    
+  66   2        }
+  67   1      }
+  68          
+  69          
+  70          
+  71          void int1(void) interrupt 2   // external interrupt 1 function
+  72          {
+  73   1        EA=0;
+  74   1                    
+  75   1        
+  76   1        // first disable interrupts
+  77   1        led=0;                // give indication
+  78   1        writecmd(0x01); 
+  79   1        writestr("counting RPM....");   // display message
+  80   1        TR0=1;                // start timer 0
+  81   1        delay();              // give 1 sec delay
+  82   1        TR0=0;              // stop timer
+  83   1        writecmd(0x80); 
+  84   1        writestr("counting finish ");   // display message
+  85   1        led=1;
+  86   1        if(TL0>0xA6)
+  87   1          {                 // if value more then 166
+  88   2            writecmd(0xC0); 
+  89   2          writestr("RPM out of range");// send message
+  90   2          }
+  91   1        else flag=1;               // if not then set the flag
+  92   1       }
+  93          
+  94           void display()            // convert hex to desimal and 
+  95            {                  // decimal to ascii
+  96   1          unsigned int tmp1,tmp2,t,t1,i,j;
+  97   1        unsigned char asci[4];  
+  98   1        tmp1 = (TL0 & 0x0F);         // get lower nibble of TL0
+  99   1        tmp2 = TL0 >> 4;         // get upper nibble of TL0
+ 100   1        tmp2 = tmp2*16;          // multiply upper nibble with 16
+ 101   1        t = tmp1+tmp2;             // get decimal number
+ 102   1        t=t*60;                // multiply it with 60
+ 103   1        i=3;
+ 104   1        if(t>=1000)            // if more then 4 digits
+ 105   1          {
+ 106   2          while(t>10)
+ 107   2            {   
+ 108   3            t1=t%10;
+ 109   3            asci[i]=t1+0x30;     // convert them one by one 
+ 110   3            t=t/10;          // into ASCII
+ 111   3            i--;
+ 112   3            }
+ 113   2          asci[0]=t+0x30;
+ 114   2          }
+ 115   1        else                 // otherwise convert
+ 116   1          {
+C51 COMPILER V9.59.0.0   TESTER                                                            02/22/2020 20:49:04 PAGE 3   
+
+ 117   2          while(t>10)
+ 118   2            {   
+ 119   3            t1=t%10;
+ 120   3            asci[i]=t1+0x30;      // last three digits
+ 121   3            t=t/10;
+ 122   3            i--;
+ 123   3            }
+ 124   2          asci[1]=t+0x30;
+ 125   2          asci[0]=0x30;        // and put first digit as 0
+ 126   2          }
+ 127   1        writecmd(0xC0); 
+ 128   1          writestr("currentRPM:");    // display current RPM and
+ 129   1        for(j=0;j<4;j++)
+ 130   1          writedata(asci[j]);     // all four digits one by one
+ 131   1        }
+ 132            void main()
+ 133              {
+ 134   1          TMOD=0x15;            // timer 0 in 16 bit counter and timer 1 in 16 bit counter
+ 135   1          P1 = 0x00;          // P1 as output port
+ 136   1          rs=0;           // clear all LCD control pins
+ 137   1          en=0;
+ 138   1          rw=0; 
+ 139   1          writecmd(0x3C);       // initialize LCD
+ 140   1          writecmd(0x0E);
+ 141   1          writecmd(0x82);
+ 142   1          writestr("RPM Counter");  // initially display message
+ 143   1          TH0=0x00;         // clear T0
+ 144   1          TL0=0x00;
+ 145   1          IE=0x84;          // enable external interrupt 1
+ 146   1          while(flag==0);       // remain withine loop till rpm flag is clear
+ 147   1          display();          // when flag is set display current RPM value
+ 148   1          while(1);         // continuous loop
+ 149   1        }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    548    ----
+   CONSTANT SIZE    =     75    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

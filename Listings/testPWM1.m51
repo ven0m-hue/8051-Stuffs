@@ -1,0 +1,152 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/15/2020  22:32:54  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\V\C51\BIN\BL51.EXE .\Objects\PWMfinal.obj TO .\Objects\testPWM1 PRINT (.\Listings\testPWM1.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\PWMfinal.obj (PWMFINAL)
+  D:\V\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\testPWM1 (PWMFINAL)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0016H     UNIT         ?PR?MAIN?PWMFINAL
+            CODE    0816H     0014H     UNIT         ?PR?PWM_LOW?PWMFINAL
+            CODE    082AH     000CH     UNIT         ?PR?PWM_HIGH?PWMFINAL
+            CODE    0836H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\testPWM1 (PWMFINAL)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PWMFINAL
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\testPWM1 (PWMFINAL)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PWMFINAL
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:0090H.0       PUBLIC        PWM_pin
+  C:0800H         PUBLIC        main
+  C:0816H         PUBLIC        PWM_low
+  B:00B0H.0       PUBLIC        PWM_00
+  D:0089H         PUBLIC        TMOD
+  B:00B0H.1       PUBLIC        PWM_20
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/15/2020  22:32:54  PAGE 2
+
+
+  B:00B0H.2       PUBLIC        PWM_50
+  B:00B0H.3       PUBLIC        PWM_80
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  B:00B0H.4       PUBLIC        PWM_100
+  C:082AH         PUBLIC        PWM_high
+  -------         PROC          PWM_LOW
+  C:0816H         LINE#         10
+  C:0816H         LINE#         11
+  C:0816H         LINE#         12
+  C:0818H         LINE#         13
+  C:081BH         LINE#         14
+  C:081EH         LINE#         15
+  C:0820H         LINE#         16
+  C:0823H         LINE#         17
+  C:0823H         LINE#         18
+  C:0825H         LINE#         19
+  C:0827H         LINE#         20
+  C:0829H         LINE#         21
+  -------         ENDPROC       PWM_LOW
+  -------         PROC          PWM_HIGH
+  C:082AH         LINE#         23
+  C:082AH         LINE#         24
+  C:082AH         LINE#         25
+  C:082CH         LINE#         26
+  C:082FH         LINE#         27
+  C:082FH         LINE#         28
+  C:0831H         LINE#         29
+  C:0833H         LINE#         30
+  C:0835H         LINE#         32
+  -------         ENDPROC       PWM_HIGH
+  -------         PROC          MAIN
+  C:0800H         LINE#         40
+  C:0800H         LINE#         41
+  C:0800H         LINE#         42
+  C:0803H         LINE#         43
+  C:0806H         LINE#         45
+  C:0809H         LINE#         48
+  C:0809H         LINE#         49
+  C:0809H         LINE#         50
+  C:080CH         LINE#         51
+  C:080CH         LINE#         52
+  C:080CH         LINE#         53
+  C:080CH         LINE#         54
+  C:080CH         LINE#         55
+  C:080CH         LINE#         56
+  C:080CH         LINE#         57
+  C:080EH         LINE#         58
+  C:080EH         LINE#         59
+  C:080EH         LINE#         60
+  C:080EH         LINE#         61
+  C:080EH         LINE#         62
+  C:080EH         LINE#         63
+  C:080EH         LINE#         64
+  C:0810H         LINE#         65
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/15/2020  22:32:54  PAGE 3
+
+
+  C:0810H         LINE#         66
+  C:0810H         LINE#         67
+  C:0810H         LINE#         68
+  C:0810H         LINE#         69
+  C:0810H         LINE#         70
+  C:0810H         LINE#         71
+  C:0812H         LINE#         72
+  C:0812H         LINE#         73
+  C:0812H         LINE#         74
+  C:0812H         LINE#         75
+  C:0812H         LINE#         76
+  C:0812H         LINE#         77
+  C:0812H         LINE#         78
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PWMFINAL
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PWM_LOW?PWMFINAL
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PWM_HIGH?PWMFINAL
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0036H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=69
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

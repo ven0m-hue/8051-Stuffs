@@ -1,0 +1,24 @@
+org 0000h
+mov a,#30h;
+anl a,#20h;
+mov 30h,a;
+mov a,#10h;
+orl a,#12h;
+mov 31h,a;
+mov a,#40h;
+xrl a,#23h;
+mov 32h,a;
+mov a,#34h;
+cpl a;
+mov 33h,a;
+mov a,#45h;
+swap a;
+mov 34h,a;
+mov a,#13h;
+xch a,30h;
+mov 35h,a;
+mov a,#15h;
+mov r1,#20h;
+xchd a,@r1;
+mov 36h,a;
+end 

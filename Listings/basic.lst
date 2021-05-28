@@ -1,0 +1,65 @@
+C51 COMPILER V9.59.0.0   BASIC                                                             02/23/2020 18:18:58 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BASIC
+OBJECT MODULE PLACED IN .\Objects\basic.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE basic.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\basic.lst
+                    -) TABS(2) OBJECT(.\Objects\basic.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3           sbit IR = P2^2;
+   4           sbit buzzer = P3^5;
+   5           //char   count; 
+   6           char rpm;
+   7           int count()
+   8           {
+   9   1          unsigned int i,j;
+  10   1          unsigned int count=0;
+  11   1          for(i=0;i<1000;i++) 
+  12   1          {
+  13   2            for(j=0;j<1227;j++)
+  14   2            {
+  15   3             if(IR == 0)
+  16   3             {
+  17   4               count++;
+  18   4               while(IR==0);
+  19   4             }
+  20   3          }
+  21   2        }
+  22   1          return count;
+  23   1      } 
+  24            
+  25           void main()
+  26           { 
+  27   1         while(1){
+  28   2         unsigned int time=0, rpm = 0;
+  29   2         buzzer = 1;
+  30   2        while(1){ 
+  31   3         if(IR == 0)
+  32   3         {
+  33   4          time = count();      
+  34   4          rpm = time; 
+  35   4         }
+  36   3         
+  37   3         if (rpm == 5)
+  38   3         {
+  39   4            buzzer = 0;
+  40   4         }
+  41   3       }}}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     81    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

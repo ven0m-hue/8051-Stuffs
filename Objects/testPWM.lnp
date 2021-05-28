@@ -1,0 +1,3 @@
+".\Objects\testPWM.obj" 
+TO ".\Objects\testPWM" 
+PRINT(".\Listings\testPWM.m51") RAMSIZE(256) 

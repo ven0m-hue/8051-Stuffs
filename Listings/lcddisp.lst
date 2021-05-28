@@ -1,0 +1,89 @@
+C51 COMPILER V9.59.0.0   LCDDISP                                                           03/05/2020 00:52:14 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE LCDDISP
+OBJECT MODULE PLACED IN .\Objects\lcddisp.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE lcddisp.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\lcddisp
+                    -.lst) TABS(2) OBJECT(.\Objects\lcddisp.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define lcd P1;
+   3          
+   4          sbit rs     = P3^6;
+   5          sbit re     = P3^7;
+   6          sbit buzzer = P3^5;
+   7          
+   8          void cmd(unsigned char a)
+   9          {
+  10   1          lcd = a;
+*** WARNING C275 IN LINE 10 OF lcddisp.c: expression with possibly no effect
+*** ERROR C141 IN LINE 10 OF lcddisp.c: syntax error near '=', expected '__asm'
+  11   1          rs = 0;
+  12   1      //    rw=0;
+  13   1          re = 1;
+  14   1          delay(1000);
+  15   1          re = 0;
+  16   1      }
+  17          
+  18          void dat(unsigned char b)
+  19            { 
+  20   1          lcd = b;
+  21   1          rs = 1;
+  22   1          re = 1;
+  23   1          delay(1000);
+  24   1          re = 0;
+  25   1          delay(1000);
+  26   1        } 
+  27          void init()
+  28          {
+  29   1        cmd(0x38);
+  30   1        cmd(0x10);
+  31   1        cmd(0xc0);
+  32   1        cmd(0x06);
+  33   1        cmd(0x01);
+  34   1      }
+  35          
+  36          void string(unsigned *s)
+  37            {
+  38   1          while(*s)
+  39   1          {
+  40   2              dat(s++); 
+  41   2          }
+  42   1        }
+  43          void delay(char f)
+  44            { 
+  45   1          char i;
+  46   1          TMOD = 0X01;
+  47   1          for(i=0;i<f;i++)
+  48   1          {
+  49   2          TF0  = 0XFC;
+  50   2          TL0  = 0X66;
+  51   2          TR0  = 1;
+  52   2          while(TF0 ==1);
+C51 COMPILER V9.59.0.0   LCDDISP                                                           03/05/2020 00:52:14 PAGE 2   
+
+  53   2          TF0 = 0;
+  54   2          TR0 = 0;
+  55   2          }     
+  56   1        } 
+  57          ///
+  58          
+  59          void main()
+  60          {
+  61   1       P1  = 0x00;
+  62   1      // P3 =  0x00;  
+  63   1       buzzer = 1;
+  64   1       init();
+  65   1       while(1)
+  66   1        {
+  67   2          cmd(0x80);
+  68   2          string("Micro-LABlet");
+  69   2          cmd(0xc0);
+  70   2          string("E&E,NMAMIT NITTE"); 
+  71   2        }
+  72   1      
+  73   1      } 
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)

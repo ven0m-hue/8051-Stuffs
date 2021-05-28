@@ -1,0 +1,3 @@
+".\Objects\hexseg.obj" 
+TO ".\Objects\hexgg" 
+PRINT(".\Listings\hexgg.m51") RAMSIZE(256) 

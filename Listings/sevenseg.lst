@@ -1,0 +1,64 @@
+C51 COMPILER V9.59.0.0   SEVENSEG                                                          02/20/2020 19:53:15 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SEVENSEG
+OBJECT MODULE PLACED IN .\Objects\sevenseg.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE sevenseg.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\sevens
+                    -eg.lst) TABS(2) OBJECT(.\Objects\sevenseg.obj)
+
+line level    source
+
+   1          // Task 5. 
+   2          // TO display the "ODD NUMBERS" from 1 to 10 on a seven segment display
+   3          #include <sevensegment.h>
+   4          declare_output_port=0x00;
+   5          sbit buzzer_control = P3^5;
+   6          sbit disp1_enable= P3^6 ;
+   7          sbit disp2_enable=P3^7 ;
+   8          sbit disp1_disable= P3^6 ;
+   9          sbit disp2_disable=P3^7 ;
+  10          void delay(unsigned int time_delay_milisecond) ;
+  11          char i,j,b,c;
+  12          void main()
+  13          {
+  14   1      unsigned char hexcode_digit[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D,
+  15   1      0x7D, 0x07,0x7F, 0x6F } ;
+  16   1      //Hex code to display 0- 9 digit
+  17   1      P1=declare_output_port;
+  18   1      buzzer_control = 0; //to turn off buzzer
+  19   1      while(1)
+  20   1      {
+  21   2      for (i=0;i<=9;i++)
+  22   2      {
+  23   3      b=i/2;                          // MSB 
+  24   3      c=i%10;                         // LSB
+  25   3      if (c%2!=0){              // put a conditon where in you can filter out all the even and odd values. 
+  26   4                                // if the no. is not equal to 2(odd) then display them on the seven seg.  
+  27   4      for(j=0;j<=50;j++)
+  28   4      {
+  29   5      disp1_enable=1;
+  30   5      disp2_disable=0;
+  31   5      P1= hexcode_digit [b];
+  32   5      delay(1000);
+  33   5      disp1_disable=0;
+  34   5      disp2_enable=1;
+  35   5      P1= hexcode_digit [c];
+  36   5      delay(10);
+  37   5      }}
+  38   3      }
+  39   2      }
+  40   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    208    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

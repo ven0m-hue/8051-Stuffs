@@ -1,0 +1,84 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    05/22/2020  19:04:54  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\V\C51\BIN\BL51.EXE .\Objects\interrupt.obj TO .\Objects\11 PRINT (.\Listings\11.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\interrupt.obj (INTERRUPT)
+  D:\V\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\11 (INTERRUPT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     07FAH                  *** GAP ***
+            CODE    0800H     000CH     UNIT         ?C_C51STARTUP
+            CODE    080CH     000BH     UNIT         ?PR?MAIN?INTERRUPT
+            CODE    0817H     0004H     UNIT         ?PR?EXT_INT?INTERRUPT
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\11 (INTERRUPT)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?INTERRUPT
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\11 (INTERRUPT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        INTERRUPT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0817H         PUBLIC        ext_int
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  C:080CH         PUBLIC        main
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.2       PUBLIC        IT1
+  -------         PROC          EXT_INT
+  C:0817H         LINE#         3
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  05/22/2020  19:04:54  PAGE 2
+
+
+  C:0817H         LINE#         5
+  C:081AH         LINE#         6
+  -------         ENDPROC       EXT_INT
+  -------         PROC          MAIN
+  C:080CH         LINE#         8
+  C:080CH         LINE#         9
+  C:080CH         LINE#         10
+  C:080EH         LINE#         11
+  C:0810H         LINE#         12
+  C:0812H         LINE#         13
+  C:0815H         LINE#         14
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        INTERRUPT
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0012H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=33
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

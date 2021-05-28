@@ -1,0 +1,3 @@
+".\Objects\PWMfinal.obj" 
+TO ".\Objects\hexggasm" 
+PRINT(".\Listings\hexggasm.m51") RAMSIZE(256) 

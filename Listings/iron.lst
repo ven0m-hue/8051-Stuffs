@@ -1,0 +1,113 @@
+C51 COMPILER V9.59.0.0   IRON                                                              03/05/2020 00:50:17 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE IRON
+OBJECT MODULE PLACED IN .\Objects\iron.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE iron.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\iron.lst) 
+                    -TABS(2) OBJECT(.\Objects\iron.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<string.h>
+   3          
+   4          sbit rs = ;         // rs pin of LCD
+*** ERROR C141 IN LINE 4 OF iron.c: syntax error near ';', expected 'sizeof'
+   5          sbit en = ;         // en pin of LCD
+*** ERROR C202 IN LINE 5 OF iron.c: 'en': undefined identifier
+*** ERROR C141 IN LINE 5 OF iron.c: syntax error near ';', expected 'sizeof'
+   6          ///sbit rw = ;          // rw pin of LCD
+   7          sbit b = ;          // busy flag 
+*** ERROR C141 IN LINE 7 OF iron.c: syntax error near ';', expected 'sizeof'
+   8          ///sbit led = ;       // led indication
+   9          //port for ir sensor 
+  10          sbit IR = ;
+*** ERROR C141 IN LINE 10 OF iron.c: syntax error near ';', expected 'sizeof'
+  11          unsigned char counter; 
+  12          
+  13          //unsigned int flag=0;      // rpm flag
+  14          
+  15          void msdelay(unsigned int t)          // 1 sec delay
+  16            {
+  17   1        unsigned int i,j;
+  18   1          for (i=0;i<t;i++)
+  19   1          for (j=0;j<1275;j++)
+  20   1        }
+*** ERROR C141 IN LINE 20 OF iron.c: syntax error near '}', expected '__asm'
+  21          void delay()
+  22          {
+  23   1        unsigned int i,j;
+  24   1        for (i=0;i<1000;i++);
+  25   1      }
+  26          
+  27          //set up lcd
+  28          void writecmd(unsigned char a)  // send command byte to LCD
+  29          {
+  30   1        P1 = a;
+  31   1        rs = 0;
+*** ERROR C202 IN LINE 31 OF iron.c: 'rs': undefined identifier
+  32   1        //rw =  
+  33   1        en = 1;
+*** ERROR C202 IN LINE 33 OF iron.c: 'en': undefined identifier
+  34   1        msdelay(1);
+  35   1        en = 0;
+*** ERROR C202 IN LINE 35 OF iron.c: 'en': undefined identifier
+  36   1      }
+  37          void writedata(unsigned char b) // send data byte to LCD
+  38          {
+  39   1        rs = 1;
+*** ERROR C202 IN LINE 39 OF iron.c: 'rs': undefined identifier
+  40   1        //rw = 0;
+  41   1        P1 = b; 
+  42   1        en = 1;
+*** ERROR C202 IN LINE 42 OF iron.c: 'en': undefined identifier
+  43   1        msdelay(1);
+C51 COMPILER V9.59.0.0   IRON                                                              03/05/2020 00:50:17 PAGE 2   
+
+  44   1        en = 0; 
+*** ERROR C202 IN LINE 44 OF iron.c: 'en': undefined identifier
+  45   1      }
+  46          
+  47          ////////////////////////////////
+  48          //function wrtie on lcd 
+  49          void writestr(unsigned char *s) // write string / message to LCD
+  50          {
+  51   1        unsigned char l,i;
+  52   1        l = strlen(s);
+  53   1        for(i=0;i<l;i++)
+  54   1        {
+  55   2          writedata(*s);
+  56   2          s++;    
+  57   2        }
+  58   1      }
+  59          
+  60          ////////////////////////////////
+  61          // fishy 
+  62          // interrupt part 
+  63          void ISR_ex0(void) interrupt 0     
+  64          {
+  65   1        counter = 0;
+*** ERROR C202 IN LINE 65 OF iron.c: 'counter': undefined identifier
+  66   1        delay();
+  67   1        counter ++;
+*** ERROR C202 IN LINE 67 OF iron.c: 'counter': undefined identifier
+  68   1      }
+  69          
+  70          
+  71            void main()
+  72              {
+  73   1            // setup 
+  74   1            IE=0x81;                // Enable INT0
+  75   1            IT0=1;                 // Set Falling Edge Trigger for INT0
+  76   1            
+  77   1            while(1)
+  78   1            {
+  79   2            rpm = counter * 60;
+*** ERROR C202 IN LINE 79 OF iron.c: 'rpm': undefined identifier
+  80   2            counter = 0;  
+*** ERROR C202 IN LINE 80 OF iron.c: 'counter': undefined identifier
+  81   2        
+  82   2        }  
+  83   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  16 ERROR(S)

@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  LAB2                                                                 01/29/2020 17:41:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab2.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE lab2.asm SET(SMALL) DEBUG PRINT(.\Listings\lab2.lst) OBJECT(.\Objects\lab2.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 7430              2     mov a,#30h;
+0002 5420              3     anl a,#20h;
+0004 F530              4     mov 30h,a;
+0006 7410              5     mov a,#10h;
+0008 4412              6     orl a,#12h;
+000A F531              7     mov 31h,a;
+000C 7440              8     mov a,#40h;
+000E 6423              9     xrl a,#23h;
+0010 F532             10     mov 32h,a;
+0012 7434             11     mov a,#34h;
+0014 F4               12     cpl a;
+0015 F533             13     mov 33h,a;
+0017 7445             14     mov a,#45h;
+0019 C4               15     swap a;
+001A F534             16     mov 34h,a;
+001C 7413             17     mov a,#13h;
+001E C530             18     xch a,30h;
+0020 F535             19     mov 35h,a;
+0022 7415             20     mov a,#15h;
+0024 7920             21     mov r1,#20h;
+0026 D7               22     xchd a,@r1;
+0027 F536             23     mov 36h,a;
+                      24     end 
+A51 MACRO ASSEMBLER  LAB2                                                                 01/29/2020 17:41:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

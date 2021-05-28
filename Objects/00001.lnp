@@ -1,0 +1,3 @@
+".\Objects\0IR.obj" 
+TO ".\Objects\00001" 
+PRINT(".\Listings\00001.m51") RAMSIZE(256) 

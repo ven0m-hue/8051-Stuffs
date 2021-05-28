@@ -1,0 +1,55 @@
+A51 MACRO ASSEMBLER  LED                                                                  02/06/2020 21:34:47 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\led.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE led.asm SET(SMALL) DEBUG PRINT(.\Listings\led.lst) OBJECT(.\Objects\led.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+0000                   5     org 0000h
+                       6             
+0000 75A0FF            7             start: mov 0x0a0, #0ffh;     // led is turned on 
+0003 120020            8                        lcall delay             
+0006 75A000            9                        mov 0x0a0, #00h;      // led turns off
+0009 120020           10                        lcall delay       
+000C 75A0FF           11                        mov 0x0a0, #0ffh;  // led is on
+000F 120020           12                        lcall delay           
+0012 75A000           13                        mov 0x0a0, #00h;     // led is off
+0015 120020           14                        lcall delay
+0018 75A000           15                        mov 0x0a0, #00h;   // led is off
+001B 120020           16                        lcall delay
+001E 0100             17                        ajmp start      
+                      18                        
+0020 7B0A             19         delay:mov r3, #0ah;   // here we are setting the delay values, so that it will blink at
+                              desired rate
+0022 79FF             20             l3:   mov r1, #0ffh;  
+0024 7AFF             21             l1:       mov r2, #0ffh;
+0026 DAFE             22             l2:   djnz r2, l2;
+0028 D9FA             23                       djnz r1, l1;
+002A DBF6             24                       djnz r3, l3;
+002C 22               25                       ret 
+                      26                       end 
+A51 MACRO ASSEMBLER  LED                                                                  02/06/2020 21:34:47 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0020H   A   
+L1 . . . . . . . .  C ADDR   0024H   A   
+L2 . . . . . . . .  C ADDR   0026H   A   
+L3 . . . . . . . .  C ADDR   0022H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

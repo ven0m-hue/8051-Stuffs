@@ -1,0 +1,52 @@
+C51 COMPILER V9.59.0.0   SIN                                                               04/21/2020 08:49:48 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SIN
+OBJECT MODULE PLACED IN .\Objects\sin.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE sin.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\sin.lst) TA
+                    -BS(2) OBJECT(.\Objects\sin.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          void delay(){
+   4   1        int i;
+   5   1        for(i=0;i<10;i++){
+   6   2        TMOD  = 0x01;
+   7   2        TH0 = 0x3C;
+   8   2        TL0 = 0xAF;
+   9   2        TR0 = 1;
+  10   2        while(TF0 ==0);
+  11   2        TR0 = 0;
+  12   2        TF0 = 0;    
+  13   2      }
+  14   1      }
+  15          
+  16          void main()
+  17          {
+  18   1        char samples[] = {0x00,0x4b,0xffffff80,0xfa,0xcb,0x80,0x35,0x6,0x6,0x35,0x80};
+  19   1        P2 = 0x00;
+  20   1        while(1)
+  21   1        { int i;
+  22   2          for(i=0;i<10;i++)
+  23   2            {
+  24   3                P2 = samples[i];
+  25   3                delay();  
+  26   3            }
+  27   2        }
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     92    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      13
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,100 @@
+A51 MACRO ASSEMBLER  LCD                                                                  03/05/2020 19:59:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lcd.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE lcd.asm SET(SMALL) DEBUG PRINT(.\Listings\lcd.lst) OBJECT(.\Objects\lcd.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000H
+                       2     
+  00B5                 3     buzzer_control EQU p3.5
+  00B6                 4     lcd_register_select EQU p3.6
+  00B7                 5     lcd_enable EQU p3.7
+0000 759000            6     mov p1, #00h
+0003 75B000            7     mov p3,#00h
+0006 D2B5              8     setb buzzer_control
+0008 120025            9     lcall lcd_initialization
+000B 7480             10     mov a,#80h
+000D 12003A           11     lcall lcd_command_write
+0010 E4               12     clr a
+0011 900066           13     mov dptr,#message_one
+0014 120049           14     lcall lcd_message_write
+0017 74C0             15     mov a,#0c0h
+0019 12003A           16     lcall lcd_command_write
+001C E4               17     clr a
+001D 900074           18     mov dptr,#message_two
+0020 120049           19     lcall lcd_message_write
+0023 80FE             20     here:sjmp here
+0025 7438             21     lcd_initialization:mov a, #38h
+0027 12003A           22     lcall lcd_command_write
+002A 7410             23     mov a, #10h
+002C 12003A           24     lcall lcd_command_write
+002F 740C             25     mov a, #0ch
+0031 12003A           26     lcall lcd_command_write
+0034 7401             27     mov a, #01h
+0036 12003A           28     lcall lcd_command_write
+0039 22               29     ret
+003A F590             30     lcd_command_write:mov p1,a
+003C C2B6             31     clr lcd_register_select
+003E D2B7             32     setb lcd_enable
+0040 120061           33     lcall delay
+0043 C2B7             34     clr lcd_enable
+0045 120061           35     lcall delay
+0048 22               36     ret
+0049 7910             37     lcd_message_write:mov r1,#10h
+004B 7A00             38     mov r2,#00h
+004D EA               39     up:mov a,r2
+004E 93               40     movc a,@a+dptr
+004F F590             41     mov p1,a
+0051 0A               42     inc r2
+0052 D2B6             43     setb lcd_register_select
+0054 D2B7             44     setb lcd_enable
+0056 120061           45     lcall delay
+0059 C2B7             46     clr lcd_enable
+005B 120061           47     lcall delay
+005E D9ED             48     djnz r1,up
+0060 22               49     ret
+0061 7DFF             50     delay: mov r5,#0ffh
+0063 DDFE             51     wait:djnz r5,wait
+0065 22               52     ret
+0066 204D6963         53     message_one: db" Micro-LABlet "
+006A 726F2D4C                
+006E 41426C65                
+0072 7420                    
+0074 4526452C         54     message_two: db "E&E,NMAMIT NITTE"
+0078 4E4D414D                
+A51 MACRO ASSEMBLER  LCD                                                                  03/05/2020 19:59:15 PAGE     2
+
+007C 4954204E                
+0080 49545445                
+                      55     end
+A51 MACRO ASSEMBLER  LCD                                                                  03/05/2020 19:59:15 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E              T Y P E  V A L U E   ATTRIBUTES
+
+BUZZER_CONTROL. . .  B ADDR   00B0H.5 A   
+DELAY . . . . . . .  C ADDR   0061H   A   
+HERE. . . . . . . .  C ADDR   0023H   A   
+LCD_COMMAND_WRITE .  C ADDR   003AH   A   
+LCD_ENABLE. . . . .  B ADDR   00B0H.7 A   
+LCD_INITIALIZATION.  C ADDR   0025H   A   
+LCD_MESSAGE_WRITE .  C ADDR   0049H   A   
+LCD_REGISTER_SELECT  B ADDR   00B0H.6 A   
+MESSAGE_ONE . . . .  C ADDR   0066H   A   
+MESSAGE_TWO . . . .  C ADDR   0074H   A   
+P1. . . . . . . . .  D ADDR   0090H   A   
+P3. . . . . . . . .  D ADDR   00B0H   A   
+UP. . . . . . . . .  C ADDR   004DH   A   
+WAIT. . . . . . . .  C ADDR   0063H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

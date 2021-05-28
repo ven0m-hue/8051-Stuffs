@@ -1,0 +1,3 @@
+".\Objects\sin.obj" 
+TO ".\Objects\00000" 
+PRINT(".\Listings\00000.m51") RAMSIZE(256) 

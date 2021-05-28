@@ -1,0 +1,50 @@
+A51 MACRO ASSEMBLER  TASK1                                                                01/23/2020 19:37:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\task1.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE task1.asm SET(SMALL) DEBUG PRINT(.\Listings\task1.lst) OBJECT(.\Objects\task1
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+0000                   8     org 0000h
+                       9             
+0000 7840             10             mov r0, #40h; 
+0002 7941             11             mov r1, #41h;
+0004 E6               12             mov a, @r0;
+0005 27               13             add a, @r1;
+0006 F543             14             mov 43h, a;
+                      15             
+                      16             
+0008 75F003           17             mov 0f0h, #3;
+000B 84               18             div ab;
+000C F544             19             mov 44h, a;
+                      20             
+                      21             
+000E 8544F0           22             mov 0f0h, 44h;
+0011 A4               23             mul ab;
+0012 F545             24             mov 45h, a;
+                      25             
+                      26     end
+A51 MACRO ASSEMBLER  TASK1                                                                01/23/2020 19:37:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

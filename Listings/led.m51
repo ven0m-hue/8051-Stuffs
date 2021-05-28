@@ -1,0 +1,55 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/06/2020  17:59:16  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\V\C51\BIN\BL51.EXE .\Objects\led.obj TO .\Objects\led PRINT (.\Listings\led.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\led.obj (LED)
+
+
+LINK MAP OF MODULE:  .\Objects\led (LED)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     001BH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\led (LED)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LED
+  C:000EH         SYMBOL        DELAY
+  C:0012H         SYMBOL        L1
+  C:0014H         SYMBOL        L2
+  C:0010H         SYMBOL        L3
+  C:0000H         SYMBOL        START
+  C:0000H         LINE#         3
+  C:0006H         LINE#         5
+  C:0009H         LINE#         2
+  C:000CH         LINE#         7
+  C:000EH         LINE#         8
+  C:0010H         LINE#         9
+  C:0012H         LINE#         10
+  C:0014H         LINE#         11
+  C:0016H         LINE#         12
+  C:0018H         LINE#         13
+  C:001AH         LINE#         14
+  -------         ENDMOD        LED
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001BH BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=27
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

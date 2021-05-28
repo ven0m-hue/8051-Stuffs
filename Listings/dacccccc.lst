@@ -1,0 +1,49 @@
+A51 MACRO ASSEMBLER  DACCCCCC                                                             04/05/2020 12:44:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\dacccccc.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE dacccccc.asm SET(SMALL) DEBUG PRINT(.\Listings\dacccccc.lst) OBJECT(.\Objects
+                      \dacccccc.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 75A000            2             mov P2, #00h;
+0003 75A0FF            3     repeat: mov P2, #0ffh;
+0006 120011            4                     lcall delay
+0009 75A07F            5                     mov P2, #7fh;
+000C 120011            6                     lcall delay
+000F 80F2              7                     sjmp repeat 
+0011 758901            8     delay:  mov TMOD, #01h;
+0014 758CFC            9             mov TH0 , #0fch;
+0017 758A6B           10                     mov TL0 , #6bh;
+001A D28C             11                     setb TR0;
+001C 308DFD           12     here:   jnb TF0, here;
+001F C28D             13             clr TF0;
+0021 C28C             14                     clr TR0;
+0023 22               15                     ret
+                      16             end             
+A51 MACRO ASSEMBLER  DACCCCCC                                                             04/05/2020 12:44:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0011H   A   
+HERE . . . . . . .  C ADDR   001CH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+REPEAT . . . . . .  C ADDR   0003H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,129 @@
+C51 COMPILER V9.59.0.0   HEXLCD                                                            03/06/2020 00:03:04 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE HEXLCD
+OBJECT MODULE PLACED IN .\Objects\hexlcd.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE hexlcd.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\hexlcd.l
+                    -st) TABS(2) OBJECT(.\Objects\hexlcd.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #define lcd P1
+   4          #include <readkey.h> 
+   5          sbit rs=P3^6; //register select
+   6          sbit en=P3^7; //enable
+   7          sbit buzzer = P3^5;
+   8          unsigned int count; 
+   9          void lcd_init();
+  10          void cmd(unsigned char);
+  11          void dat(unsigned char);
+  12          void lcd_string(char *s);
+  13          void lcd_data(unsigned char x); 
+  14          int timer_count;// global variable 
+  15          //unsigned char x;
+  16          //int num[10];
+  17          /// interrupt 
+  18          void delay(unsigned int time_delay_milisecond)
+  19          {
+  20   1      TMOD=0x10; //set the timer#1 in mode#1
+  21   1      for (timer_count =0; timer_count<time_delay_milisecond; timer_count ++){
+  22   2        TL1=0x61;  //this function generates 1ms delay
+  23   2        TH1=0xFC;
+  24   2        TR1=1;
+  25   2        while(TF1==0); //monitoring the timer flag for timer
+  26   2        TR1=0;
+  27   2        TF1=0;}
+  28   1      }
+  29          void main()
+  30          {   
+  31   1          char x = 0, b[3],m=0,l=0,i=0,t1=0,t2=0;
+  32   1          buzzer = 1;
+  33   1          lcd_init();
+  34   1          lcd_string("  Starting..  ");
+  35   1          delay(200);
+  36   1          while(1){
+  37   2                  cmd(0x01);
+  38   2                 for(i = 0; i<2; i++)
+  39   2            {
+  40   3              b[i] = readkey();
+  41   3              delay(200);
+  42   3            }
+  43   2              t1 = b[0];
+  44   2              t2 = b[1];
+  45   2              x = b[0] + b[1];
+  46   2                 lcd_data(t1);
+  47   2                 delay(200);
+  48   2                 lcd_string("+");
+  49   2                 delay(200);
+  50   2                 lcd_data(t2);
+  51   2                 delay(200);
+  52   2                 lcd_string("=");
+  53   2                 delay(200);
+  54   2                 lcd_data(x);
+C51 COMPILER V9.59.0.0   HEXLCD                                                            03/06/2020 00:03:04 PAGE 2   
+
+  55   2                 delay(20000);
+  56   2          }
+  57   1      }
+  58           
+  59          void lcd_init()
+  60          {
+  61   1          cmd(0x38);
+  62   1          cmd(0x0e);
+  63   1          cmd(0x06);
+  64   1          cmd(0x01);
+  65   1          cmd(0x80);
+  66   1      }
+  67           
+  68          void cmd(unsigned char a)
+  69          {
+  70   1          lcd=a;
+  71   1          rs=0;
+  72   1          //rw=0;
+  73   1          en=1;
+  74   1          delay(200);
+  75   1          en=0;
+  76   1      }
+  77           
+  78          void dat(unsigned char b)
+  79          {
+  80   1          lcd=b;
+  81   1          rs=1;
+  82   1          //rw=0;
+  83   1          en=1;
+  84   1          delay(200);
+  85   1          en=0;
+  86   1      }
+  87           
+  88          void lcd_string(char *s)
+  89          {
+  90   1          while(*s) {
+  91   2             dat(*s++);
+  92   2           }
+  93   1      }
+  94           
+  95          //
+  96          void lcd_data(unsigned char x)     //Function to send data on LCD
+  97          {
+  98   1      
+  99   1        unsigned char hex_code[] = { 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x61, 0x62, 0x6
+             -3, 0x64, 0x64, 0x65, 0x66};
+ 100   1        dat(hex_code[x]);
+ 101   1        delay(10);
+ 102   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    496    ----
+   CONSTANT SIZE    =     36    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5      30
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

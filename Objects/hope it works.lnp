@@ -1,0 +1,3 @@
+".\Objects\basic.obj" 
+TO ".\Objects\hope it works" 
+PRINT(".\Listings\hope it works.m51") RAMSIZE(256) 

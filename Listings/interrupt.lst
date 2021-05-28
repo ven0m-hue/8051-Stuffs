@@ -1,0 +1,39 @@
+C51 COMPILER V9.59.0.0   INTERRUPT                                                         05/22/2020 19:04:54 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE INTERRUPT
+OBJECT MODULE PLACED IN .\Objects\interrupt.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE interrupt.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\inter
+                    -rupt.lst) TABS(2) OBJECT(.\Objects\interrupt.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          void ext_int() interrupt 0
+   4          {
+   5   1         P2 = ~ P2;
+   6   1      }
+   7          
+   8          void main()
+   9          {
+  10   1          EA = 1;
+  11   1          EX0 = 1;
+  12   1          IT1 = 0;
+  13   1          P2 = 0xff;
+  14   1          while(1);
+  15   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     15    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

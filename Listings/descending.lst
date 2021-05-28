@@ -1,0 +1,43 @@
+A51 MACRO ASSEMBLER  DESCENDING                                                           02/07/2020 00:46:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\descending.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE descending.asm SET(SMALL) DEBUG PRINT(.\Listings\descending.lst) OBJECT(.\Obj
+                      ects\descending.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 790A              2                       mov r1,#0ah;
+                       3                       
+0002 7830              4             start: mov r0,#30h;
+0004 E6                5                l2: mov a,@r0;
+0005 08                6                    inc r0;
+0006 96                7                        subb a,@r0;
+0007 5002              8                        jnc l1;
+0009 40F9              9                        jc l2;
+000B E6               10                l1: mov a,@r0;
+000C 18               11                        dec r0;
+000D C6               12                        xch a,@r0;
+000E 08               13                        inc r0;
+000F F6               14                        mov @r0,a;
+0010 D9F0             15                        djnz r1,start;
+                      16                        end
+A51 MACRO ASSEMBLER  DESCENDING                                                           02/07/2020 00:46:43 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+L1 . . . . . . . .  C ADDR   000BH   A   
+L2 . . . . . . . .  C ADDR   0004H   A   
+START. . . . . . .  C ADDR   0002H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

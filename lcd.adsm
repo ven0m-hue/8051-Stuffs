@@ -1,0 +1,56 @@
+org 0000H
+# define lcd_data p1
+buzzer_control EQU p3.5
+lcd_register_select EQU p3.6
+lcd_enable EQU p3.7
+mov p1, #00h
+mov p3,#00h
+setbbuzzer_control
+lcalllcd_initialization
+mov a,#80h
+lcalllcd_command_write
+clr a
+movdptr,#message_one
+lcalllcd_message_write
+mov a,#0c0h
+lcalllcd_command_write
+clr a
+movdptr,#message_two
+lcalllcd_message_write
+here:sjmp here
+lcd_initialization:mov a, #38h
+lcalllcd_command_write
+mov a, #10h
+lcalllcd_command_write
+mov a, #0ch
+lcalllcd_command_write
+mov a, #01h
+lcalllcd_command_write
+ret
+lcd_command_write:mov p1,a
+clrlcd_register_select
+setblcd_enable
+lcall delay
+clrlcd_enable
+lcall delay
+ret
+lcd_message_write:mov r1,#10h
+mov r2,#00h
+up:mov a,r2
+movc a,@a+dptr
+mov p1,a
+inc r2Microcontroller Lab Manual
+Department of Electrical & Electronics, NMAMIT, Nitte 27
+setblcd_register_select
+setblcd_enable
+lcall delay
+clrlcd_enable
+lcall delay
+djnz r1,up
+ret
+delay: mov r5,#0ffh
+wait:djnz r5,wait
+ret
+message_one: db" Micro-LABlet "
+message_two: db "E&E,NMAMIT NITTE"
+end

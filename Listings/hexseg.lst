@@ -1,0 +1,45 @@
+C51 COMPILER V9.59.0.0   HEXSEG                                                            02/21/2020 00:04:56 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE HEXSEG
+OBJECT MODULE PLACED IN .\Objects\hexseg.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE hexseg.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\hexseg.l
+                    -st) TABS(2) OBJECT(.\Objects\hexseg.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <readkey.h>
+   3          #include <display.h>
+   4          sbit buzzer_ctrl = P3^5;
+   5          char b;
+   6          char readkey();
+   7          void display();
+   8          void main()
+   9          {
+  10   1            P1 = 0x00;
+  11   1            P2 = 0xff;
+  12   1            buzzer_ctrl = 1;
+  13   1            while(1)
+  14   1            {
+  15   2              b = readkey();
+  16   2              c = readkey();
+  17   2              display();
+  18   2            
+  19   2            }
+  20   1      
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    241    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     19    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

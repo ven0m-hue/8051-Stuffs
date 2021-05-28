@@ -1,0 +1,3 @@
+".\Objects\keypad.obj" 
+TO ".\Objects\6task6" 
+PRINT(".\Listings\6task6.m51") RAMSIZE(256) 

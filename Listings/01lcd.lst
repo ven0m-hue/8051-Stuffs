@@ -1,0 +1,101 @@
+C51 COMPILER V9.59.0.0   01LCD                                                             03/05/2020 19:21:55 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE 01LCD
+OBJECT MODULE PLACED IN .\Objects\01lcd.obj
+COMPILER INVOKED BY: D:\v\C51\BIN\C51.EXE 01lcd.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\01lcd.lst
+                    -) TABS(2) OBJECT(.\Objects\01lcd.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define  lcd P1
+   3          
+   4          sbit rs     = P3^6;
+   5          sbit re     = P3^7;
+   6          sbit buzzer = P3^5;
+   7          
+   8          void init();
+   9          void cmd(unsigned char);
+  10          void dat(unsigned char);
+  11          void delay(unsigned char);
+  12          void string( char *s);
+  13          ///
+  14          
+  15          void main()
+  16          {
+  17   1       buzzer = 1;
+  18   1       init();
+  19   1        string("Starting...");
+  20   1       while(1)
+  21   1        {
+  22   2          cmd(0x80);
+  23   2          string("Micro-LABlet");
+  24   2          cmd(0xc0);
+  25   2          string("E&E,NMAMIT NITTE"); 
+  26   2        }
+  27   1      
+  28   1      } 
+  29          
+  30          void cmd(unsigned char a)
+  31          {   
+  32   1          lcd = a;
+  33   1          rs = 0;
+  34   1          re = 1;
+  35   1          delay(10);
+  36   1          re = 0;
+  37   1      }
+  38          void init()
+  39          {
+  40   1        cmd(0x38);
+  41   1          cmd(0x0e);
+  42   1          cmd(0x06);
+  43   1          cmd(0x01);
+  44   1          cmd(0x80);
+  45   1      }
+  46          void dat(unsigned char b)
+  47            { 
+  48   1          lcd = b;
+  49   1          rs = 1;
+  50   1          re = 1;
+  51   1          delay(10);
+  52   1          re = 0;
+  53   1        } 
+  54          
+C51 COMPILER V9.59.0.0   01LCD                                                             03/05/2020 19:21:55 PAGE 2   
+
+  55          void string(char *s)
+  56            {
+  57   1          while(*s)
+  58   1          {
+  59   2              dat(*s++);  
+  60   2          }
+  61   1        }
+  62          void delay(unsigned char f)
+  63            { 
+  64   1          char i;
+  65   1          TMOD = 0X01;
+  66   1          for(i=0;i<f;i++)
+  67   1          {
+  68   2          TF0  = 0XFC;
+  69   2          TL0  = 0X66;
+  70   2          TR0  = 1;
+  71   2          while(TF0 ==1);
+  72   2          TF0 = 0;
+  73   2          TR0 = 0;
+  74   2          }     
+  75   1        } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    175    ----
+   CONSTANT SIZE    =     42    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,225 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/20/2020  21:28:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\V\C51\BIN\BL51.EXE .\Objects\hexseg.obj TO .\Objects\hexg PRINT (.\Listings\hexg.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\hexseg.obj (HEXSEG)
+  D:\V\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\V\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\hexg (HEXSEG)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0012H     UNIT         ?DT?HEXSEG
+            IDATA   001AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00BBH     UNIT         ?PR?READKEY?HEXSEG
+            CODE    08BBH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0947H     0013H     UNIT         ?C_INITSEG
+            CODE    095AH     0012H     UNIT         ?PR?MAIN?HEXSEG
+            CODE    096CH     000FH     UNIT         ?PR?DISPLAY?HEXSEG
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\hexg (HEXSEG)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?HEXSEG
+  +--> ?C_INITSEG
+
+?PR?MAIN?HEXSEG
+  +--> ?PR?READKEY?HEXSEG
+  +--> ?PR?DISPLAY?HEXSEG
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\hexg (HEXSEG)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HEXSEG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/20/2020  21:28:41  PAGE 2
+
+
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A0H.7       PUBLIC        ROW_0
+  B:00A0H.6       PUBLIC        ROW_1
+  B:00A0H.5       PUBLIC        ROW_2
+  B:00A0H.4       PUBLIC        ROW_3
+  C:095AH         PUBLIC        main
+  B:00B0H.6       PUBLIC        disp1_enable
+  B:00B0H.7       PUBLIC        disp2_enable
+  B:00B0H.5       PUBLIC        buzzer_ctrl
+  D:0008H         PUBLIC        hexcode_digit
+  D:0018H         PUBLIC        a
+  D:0019H         PUBLIC        b
+  C:0800H         PUBLIC        readkey
+  B:00A0H.3       PUBLIC        COL_0
+  B:00A0H.2       PUBLIC        COL_1
+  B:00A0H.1       PUBLIC        COL_2
+  B:00A0H.0       PUBLIC        COL_3
+  C:096CH         PUBLIC        display
+  -------         PROC          READKEY
+  C:0800H         LINE#         12
+  C:0800H         LINE#         13
+  C:0800H         LINE#         14
+  C:0802H         LINE#         15
+  C:0804H         LINE#         16
+  C:0806H         LINE#         17
+  C:0808H         LINE#         18
+  C:080AH         LINE#         19
+  C:080CH         LINE#         20
+  C:080EH         LINE#         21
+  C:0810H         LINE#         23
+  C:0813H         LINE#         24
+  C:0813H         LINE#         25
+  C:0816H         LINE#         26
+  C:0819H         LINE#         27
+  C:0819H         LINE#         28
+  C:081CH         LINE#         29
+  C:081CH         LINE#         30
+  C:081FH         LINE#         31
+  C:0822H         LINE#         32
+  C:0822H         LINE#         33
+  C:0825H         LINE#         34
+  C:0825H         LINE#         35
+  C:0828H         LINE#         36
+  C:082BH         LINE#         37
+  C:082BH         LINE#         38
+  C:082EH         LINE#         39
+  C:082EH         LINE#         40
+  C:0831H         LINE#         41
+  C:0834H         LINE#         42
+  C:0834H         LINE#         43
+  C:0836H         LINE#         44
+  C:0838H         LINE#         45
+  C:083AH         LINE#         46
+  C:083CH         LINE#         48
+  C:083FH         LINE#         49
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/20/2020  21:28:41  PAGE 3
+
+
+  C:083FH         LINE#         50
+  C:0842H         LINE#         51
+  C:0845H         LINE#         52
+  C:0845H         LINE#         53
+  C:0848H         LINE#         54
+  C:0848H         LINE#         55
+  C:084BH         LINE#         56
+  C:084EH         LINE#         57
+  C:084EH         LINE#         58
+  C:0851H         LINE#         59
+  C:0851H         LINE#         60
+  C:0854H         LINE#         61
+  C:0857H         LINE#         62
+  C:0857H         LINE#         63
+  C:085AH         LINE#         64
+  C:085AH         LINE#         65
+  C:085DH         LINE#         66
+  C:0860H         LINE#         67
+  C:0860H         LINE#         68
+  C:0862H         LINE#         69
+  C:0864H         LINE#         70
+  C:0866H         LINE#         71
+  C:0868H         LINE#         73
+  C:086BH         LINE#         74
+  C:086BH         LINE#         75
+  C:086EH         LINE#         76
+  C:0871H         LINE#         77
+  C:0871H         LINE#         78
+  C:0874H         LINE#         79
+  C:0874H         LINE#         80
+  C:0877H         LINE#         81
+  C:087AH         LINE#         82
+  C:087AH         LINE#         83
+  C:087DH         LINE#         84
+  C:087DH         LINE#         85
+  C:0880H         LINE#         86
+  C:0883H         LINE#         87
+  C:0883H         LINE#         88
+  C:0886H         LINE#         89
+  C:0886H         LINE#         90
+  C:0889H         LINE#         91
+  C:088CH         LINE#         92
+  C:088CH         LINE#         93
+  C:088EH         LINE#         94
+  C:0890H         LINE#         95
+  C:0892H         LINE#         96
+  C:0894H         LINE#         98
+  C:0897H         LINE#         99
+  C:0897H         LINE#         100
+  C:089AH         LINE#         101
+  C:089DH         LINE#         102
+  C:089DH         LINE#         103
+  C:08A0H         LINE#         104
+  C:08A0H         LINE#         105
+  C:08A3H         LINE#         106
+  C:08A6H         LINE#         107
+  C:08A6H         LINE#         108
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/20/2020  21:28:41  PAGE 4
+
+
+  C:08A9H         LINE#         109
+  C:08A9H         LINE#         110
+  C:08ACH         LINE#         111
+  C:08AFH         LINE#         112
+  C:08AFH         LINE#         113
+  C:08B2H         LINE#         114
+  C:08B2H         LINE#         115
+  C:08B5H         LINE#         116
+  C:08B8H         LINE#         117
+  C:08B8H         LINE#         118
+  C:08BAH         LINE#         119
+  -------         ENDPROC       READKEY
+  -------         PROC          DISPLAY
+  C:096CH         LINE#         7
+  C:096CH         LINE#         8
+  C:096CH         LINE#         9
+  C:096EH         LINE#         10
+  C:0970H         LINE#         11
+  C:0978H         LINE#         12
+  C:097AH         LINE#         13
+  -------         ENDPROC       DISPLAY
+  -------         PROC          MAIN
+  C:095AH         LINE#         8
+  C:095AH         LINE#         9
+  C:095AH         LINE#         10
+  C:095DH         LINE#         11
+  C:0960H         LINE#         12
+  C:0962H         LINE#         13
+  C:0962H         LINE#         14
+  C:0962H         LINE#         15
+  C:0967H         LINE#         16
+  C:096AH         LINE#         18
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        HEXSEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00EEH BYTE (11%) *
+******************************************************************************
+
+Program Size: data=27.0 xdata=0 code=382
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  TASK2                                                                01/30/2020 17:06:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\task2.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE task2.asm SET(SMALL) DEBUG PRINT(.\Listings\task2.lst) OBJECT(.\Objects\task2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+0000                   8     org 0000h                                                        
+0000 7830              9             mov r0,#30h;                               // r0=0              r0=#30h
+0002 E6               10             mov a, @r0;                                        // a=00h             a=30h    
+                      11             
+0003 20E003           12             jb 0e0h, odd;                  // jump bit if A is odd to label "odd"
+0006 30E005           13             jnb 0e0h, evenn;                           // iump bit if A is even to label "evenn
+                             "    
+                      14             
+0009 753501           15     odd:mov 35h, #01h;                                      // 35h=00           35h=#01h
+000C 0111             16             ajmp terminate;                                 // absolute jump and terminate 
+000E 7535FF           17     evenn: mov 35h, #0ffh;              // 35h=00            35h=#0ffh
+0011 00               18     terminate: nop;                                         // no operation
+                      19     
+                      20     end 
+A51 MACRO ASSEMBLER  TASK2                                                                01/30/2020 17:06:48 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EVENN. . . . . . .  C ADDR   000EH   A   
+ODD. . . . . . . .  C ADDR   0009H   A   
+TERMINATE. . . . .  C ADDR   0011H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,84 @@
+A51 MACRO ASSEMBLER  SEVEN                                                                02/20/2020 19:36:59 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\seven.obj
+ASSEMBLER INVOKED BY: D:\v\C51\BIN\A51.EXE seven.asm SET(SMALL) DEBUG PRINT(.\Listings\seven.lst) OBJECT(.\Objects\seven
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+                       2     
+                       3     
+0000 780A              4     start: mov r0,#0ah; //to keep count of 10
+0002 7900              5     mov r1,#00h; //to start count from 0
+0004 E9                6     repeat:mov a,r1;
+0005 540F              7     anl a,#0fh; //to mask LSB
+0007 FA                8     mov r2,a;
+0008 E9                9     mov a,r1;
+0009 540F             10     anl a,#0fh; //to mask MSB
+000B C4               11     swap a;
+000C FB               12     mov r3,a;
+000D 7E30             13     mov r6,#30h; //count to make display at visible rate
+000F D2B7             14     up:setb 0x0b0.7; //activate display#1
+0011 C2B6             15     clr 0x0b0.6;
+0013 EA               16     mov a,r2;
+0014 12002C           17     lcall display    
+0017 120033           18     lcall delay      
+001A C2B7             19     clr 0x0b0.7;
+001C D2B6             20     setb 0x0b0.6; //activate display#2
+001E EB               21     mov a,r3;
+001F 12002C           22     lcall display
+0022 120033           23     lcall delay
+0025 DEE8             24     djnz r6,up;
+0027 09               25     inc r1;
+0028 D8DA             26     djnz r0,repeat;
+002A 0100             27     ajmp start
+002C 900046           28     display: mov dptr, #string
+002F 93               29     movc a,@a+dptr;
+0030 F590             30     mov 0x90,a;
+0032 22               31     ret
+0033 758910           32     delay: mov tmod, #10h; //timer1 mode1   // operating timer mode at timer 1 and mode 1 13bit
+                              timer 
+0036 758DD8           33     mov th1, #0D8h;                         // gives a delay of 10 mili sec
+0039 758BF0           34     mov tl1,#0F0h;                                                  // which can be calculated 
+                             using the formula            
+003C D28E             35     setb tr1;                               // since it is a 16 bit no. it is stored in two, th
+                             1 and tl1
+003E 308FFD           36     wait: jnb tf1,wait;
+0041 C28F             37     clr tf1;
+0043 C28E             38     clr tr1;
+0045 22               39     ret
+0046 3F065B4F         40     string: db 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07,0x7F, 0x6F; // These are the numb
+                             eers to be displayed on the seven segment
+004A 666D7D07                
+004E 7F6F                    
+                      41     
+                      42     end
+A51 MACRO ASSEMBLER  SEVEN                                                                02/20/2020 19:36:59 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0033H   A   
+DISPLAY. . . . . .  C ADDR   002CH   A   
+REPEAT . . . . . .  C ADDR   0004H   A   
+START. . . . . . .  C ADDR   0000H   A   
+STRING . . . . . .  C ADDR   0046H   A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+UP . . . . . . . .  C ADDR   000FH   A   
+WAIT . . . . . . .  C ADDR   003EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

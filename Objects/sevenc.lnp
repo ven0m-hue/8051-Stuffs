@@ -1,0 +1,3 @@
+".\Objects\hexseg.obj" 
+TO ".\Objects\sevenc" 
+PRINT(".\Listings\sevenc.m51") RAMSIZE(256) 
