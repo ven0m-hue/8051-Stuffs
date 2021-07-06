@@ -6,7 +6,7 @@
 // 3. Calculate the square of the content in M[44h] and store those values in M[45h];
 
 org 0000h
-	// Sum of three numbers			//	 BE        :: AE
+	// Sum of three numbers				//	 BE        :: AE
 	mov r0, #40h; 					//   r0=00h		  ro=40h
 	mov r1, #41h;					//   r1=00h 	  r1=41h
 	mov a, @r0;						//   r0[40]=00    r0[40]=23h

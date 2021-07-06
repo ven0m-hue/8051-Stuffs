@@ -1,5 +1,5 @@
 #include <reg51.h>
-
+// Polling mode IR sensor 
  sbit IR = P2^2;
  sbit buzzer = P3^5;
  //char   count; 
@@ -24,18 +24,24 @@
   
  void main()
  { 
-	 while(1){
-	 unsigned int time=0, rpm = 0;
-	 buzzer = 1;
-	while(1){ 
-	 if(IR == 0)
+	 while(1)
 	 {
-    time = count(); 		 
-		rpm = time; 
-	 }
-	 
-   if (rpm == 5)
-	 {
-			buzzer = 0;
-	 }
- }}}
+		unsigned int time=0, rpm = 0;
+		buzzer = 1;
+		while(1)
+		{ 
+		 if(IR == 0)
+		 {
+			time = count(); 		 
+			rpm = time; 
+		 }
+		 
+		   if (rpm == 5)
+			 {
+					buzzer = 0;
+			 }
+		 
+		}
+		
+	}
+ }

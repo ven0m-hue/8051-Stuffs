@@ -1,4 +1,6 @@
-ORG 0H
+// PWM Motor Control
+
+ORG 0000H
 
 MAIN:
     MOV P3,#00H   ;LCD data pin

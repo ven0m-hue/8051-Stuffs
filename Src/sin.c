@@ -1,5 +1,5 @@
 #include <reg51.h>
-
+//Sine wave generation using DAC
 void delay(){
 	int i;
 	for(i=0;i<10;i++){

@@ -1,3 +1,4 @@
+// Digital to Analog Converter 
 org 0000h
 repeat: mov P2, #00h;
 	    mov P2, #0ffh;

@@ -1,4 +1,3 @@
-//TASK 3
 // Write an ALP for blinking led in particular sequence 
 // ON_OFF_ON_OFF_OFF_ON
 

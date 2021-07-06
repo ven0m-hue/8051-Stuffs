@@ -1,3 +1,4 @@
+// LCD Display
 org 0000H
 # define lcd_data p1      
 buzzer_control EQU p3.5       

@@ -20,9 +20,9 @@ void main()
  while(1)
 	{
 	  cmd(0x80);
-	  string("Micro-LABlet");
+	  string("MICRO-CONTROLLER 80c51");
 		cmd(0xc0);
-		string("E&E,NMAMIT NITTE");	
+		string("HELLO WORLD");	
 	}
 
 }	
